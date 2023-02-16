@@ -1144,7 +1144,7 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
                       parentNode:(IJSVGNode*)parentNode
                 postProcessBlock:(IJSVGNodeParserPostProcessBlock*)postProcessBlock
 {
-    IJSVGPath* node = [[IJSVGPath alloc] init];
+    IJSVGEllipsePath* node = [[IJSVGEllipsePath alloc] init];
     node.name = element.localName;
     node.primitiveType = kIJSVGPrimitivePathTypeCircle;
     node.type = IJSVGNodeTypeCircle;
@@ -1175,6 +1175,11 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
     CGFloat cY = [cYu computeValue:computedBounds.size.height];
     CGFloat rX = [ru computeValue:computedBounds.size.width];
     CGFloat rY = [ru computeValue:computedBounds.size.height];
+    
+    node.cX = cX;
+    node.cY = cY;
+    node.rX = rX;
+    node.rY = rY;
     
     // if rX and rY dont match, we are not a circle but an ellipsis, this is
     // insanely important when it comes to exporting

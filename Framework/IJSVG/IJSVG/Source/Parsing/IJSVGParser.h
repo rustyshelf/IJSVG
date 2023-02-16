@@ -15,6 +15,7 @@
 #import <IJSVG/IJSVGImage.h>
 #import <IJSVG/IJSVGLinearGradient.h>
 #import <IJSVG/IJSVGPath.h>
+#import <IJSVG/IJSVGEllipsePath.h>
 #import <IJSVG/IJSVGPattern.h>
 #import <IJSVG/IJSVGMask.h>
 #import <IJSVG/IJSVGClipPath.h>

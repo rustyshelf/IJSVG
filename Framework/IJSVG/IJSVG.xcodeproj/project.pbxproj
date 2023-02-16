@@ -160,6 +160,8 @@
 		59FCC09527F2394D00BB924E /* IJSVGRootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FCC09327F2394D00BB924E /* IJSVGRootNode.m */; };
 		59FDBF0027F3454800AF7038 /* IJSVGColorNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 59FDBEFE27F3454800AF7038 /* IJSVGColorNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59FDBF0127F3454800AF7038 /* IJSVGColorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FDBEFF27F3454800AF7038 /* IJSVGColorNode.m */; };
+		BDC1ED91299DD228003D0E0F /* IJSVGEllipsePath.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC1ED90299DD228003D0E0F /* IJSVGEllipsePath.m */; };
+		BDC1ED93299DD4F5003D0E0F /* IJSVGEllipsePath.h in Headers */ = {isa = PBXBuildFile; fileRef = BDC1ED92299DD23D003D0E0F /* IJSVGEllipsePath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -318,6 +320,8 @@
 		59FCC09327F2394D00BB924E /* IJSVGRootNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IJSVGRootNode.m; sourceTree = "<group>"; };
 		59FDBEFE27F3454800AF7038 /* IJSVGColorNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IJSVGColorNode.h; sourceTree = "<group>"; };
 		59FDBEFF27F3454800AF7038 /* IJSVGColorNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IJSVGColorNode.m; sourceTree = "<group>"; };
+		BDC1ED90299DD228003D0E0F /* IJSVGEllipsePath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IJSVGEllipsePath.m; sourceTree = "<group>"; };
+		BDC1ED92299DD23D003D0E0F /* IJSVGEllipsePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IJSVGEllipsePath.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +467,8 @@
 				59EB757623905F6C00F5AE63 /* IJSVGImage.m */,
 				59EB759223905F6D00F5AE63 /* IJSVGNode.h */,
 				59EB759623905F6D00F5AE63 /* IJSVGNode.m */,
+				BDC1ED92299DD23D003D0E0F /* IJSVGEllipsePath.h */,
+				BDC1ED90299DD228003D0E0F /* IJSVGEllipsePath.m */,
 				59EB759D23905F6E00F5AE63 /* IJSVGPath.h */,
 				59EB758A23905F6D00F5AE63 /* IJSVGPath.m */,
 				59EB75BB23905F7000F5AE63 /* IJSVGPattern.h */,
@@ -632,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59EB762623905F7300F5AE63 /* IJSVGImage.h in Headers */,
+				BDC1ED93299DD4F5003D0E0F /* IJSVGEllipsePath.h in Headers */,
 				59EB760823905F7300F5AE63 /* IJSVGShapeLayer.h in Headers */,
 				59EB760F23905F7300F5AE63 /* IJSVGCommandEllipticalArc.h in Headers */,
 				59EB75F523905F7300F5AE63 /* IJSVGError.h in Headers */,
@@ -811,6 +818,7 @@
 				59EB75E923905F7300F5AE63 /* IJSVGStringAdditions.m in Sources */,
 				59FDBF0127F3454800AF7038 /* IJSVGColorNode.m in Sources */,
 				59557320286C643900156047 /* IJSVGTileLayer.m in Sources */,
+				BDC1ED91299DD228003D0E0F /* IJSVGEllipsePath.m in Sources */,
 				59EB761723905F7300F5AE63 /* IJSVGRadialGradient.m in Sources */,
 				59EB75E223905F7300F5AE63 /* IJSVGTraitedColorStorage.m in Sources */,
 				595BA91D280EB29B00AD1C89 /* IJSVGFilterLayer.m in Sources */,
