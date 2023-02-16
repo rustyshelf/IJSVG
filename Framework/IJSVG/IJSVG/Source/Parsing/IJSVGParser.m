@@ -1092,7 +1092,7 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
                        parentNode:(IJSVGNode*)parentNode
                  postProcessBlock:(IJSVGNodeParserPostProcessBlock*)postProcessBlock
 {
-    IJSVGPath* node = [[IJSVGPath alloc] init];
+    IJSVGEllipsePath* node = [[IJSVGEllipsePath alloc] init];
     node.name = element.localName;
     node.primitiveType = kIJSVGPrimitivePathTypeEllipse;
     node.type = IJSVGNodeTypeEllipse;
@@ -1133,6 +1133,12 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
     CGFloat cY = [cYu computeValue:computedBounds.size.height];
     CGFloat rX = [rXu computeValue:computedBounds.size.width];
     CGFloat rY = [rYu computeValue:computedBounds.size.height];
+    
+    node.cX = cX;
+    node.cY = cY;
+    node.rX = rX;
+    node.rY = rY;
+    
     CGRect rect = CGRectMake(cX - rX, cY - rY, rX * 2, rY * 2);
     CGPathRef nPath = CGPathCreateWithEllipseInRect(rect, NULL);
     node.path = (CGMutablePathRef)nPath;
