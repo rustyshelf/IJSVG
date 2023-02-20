@@ -19,17 +19,19 @@
 
 - (void)dealloc
 {
-    // this can all be called on the background thread to be released
-    BOOL hasTransaction = IJSVGBeginTransaction();
-    // kill any memory that has been around
+    // thread manager will deal with this for us, but if we are main thread,
+    // we want to kick this off as soon as possible, or if the memory is set
+    // to quick.
+    IJSVGThreadManager* threadManager = IJSVGThreadManager.currentManager;
+    BOOL flag = IJSVGBeginTransaction();
     _layerTree = nil;
     _rootLayer = nil;
-    if(hasTransaction == YES) {
+    if(flag == YES) {
         IJSVGEndTransaction();
     }
     
     // tell the thread manager we are done with
-    [IJSVGThreadManager.currentManager remove:self];
+    [threadManager remove:self];
 }
 
 + (id)SVGNamed:(NSString*)string
