@@ -11,6 +11,6 @@
 @interface IJSVGText : IJSVGGroup {
 }
 
-@property (nonatomic, copy) NSString* text;
+@property (nonatomic, copy) NSAttributedString* text;
 
 @end

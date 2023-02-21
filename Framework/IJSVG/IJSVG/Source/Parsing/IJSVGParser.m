@@ -662,6 +662,15 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
                                     postProcessBlock:&postProcessBlock];
             break;
         }
+        case IJSVGNodeTypeText: {
+            computedNode = [self parseTextElement:element
+                                          parentNode:node
+                                    postProcessBlock:&postProcessBlock];
+            break;
+        }
+        case IJSVGNodeTypeFont: {
+            NSLog(@"Found a font \(element)");
+        }
         case IJSVGNodeTypeRect: {
             computedNode = [self parseRectElement:element
                                        parentNode:node
@@ -1084,6 +1093,37 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
     [self parsePolyPoints:pointsString
                  intoPath:node
                 closePath:YES];
+    
+    return node;
+}
+
+- (IJSVGNode*)parseTextElement:(NSXMLElement*)element
+                       parentNode:(IJSVGNode*)parentNode
+                 postProcessBlock:(IJSVGNodeParserPostProcessBlock*)postProcessBlock
+{
+    IJSVGText* node = [[IJSVGText alloc] init];
+    node.name = element.localName;
+    node.type = IJSVGNodeTypeText;
+    
+    if([parentNode isKindOfClass:IJSVGGroup.class] == YES) {
+        IJSVGGroup* group = (IJSVGGroup*)parentNode;
+        [group addChild:node];
+    }
+    
+//    CGRect computedBounds = CGRectZero;
+//    IJSVGUnitType contentUnits = [parentNode contentUnitsWithReferencingNodeBounds:&computedBounds];
+    *postProcessBlock = [self computeAttributesFromElement:element
+                                                    onNode:node
+                                         ignoredAttributes:nil];
+    
+    NSString* text = element.stringValue;
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+    
+    // TODO: parse the actual font
+    NSFont *tempFont = [NSFont systemFontOfSize:16];
+    [attributedText addAttribute:NSFontAttributeName value:tempFont range:NSMakeRange(0, attributedText.length)];
+    
+    node.text = attributedText;
     
     return node;
 }
