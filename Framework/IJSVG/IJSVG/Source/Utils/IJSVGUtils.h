@@ -11,6 +11,7 @@
 #import <IJSVG/IJSVGStringAdditions.h>
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <AppKit/NSFontManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -79,6 +80,8 @@ BOOL IJSVGIsSVGLayer(CALayer* layer);
 + (IJSVGFontTraits)fontStyleStringForString:(NSString*)string;
 + (IJSVGFontTraits)fontWeightTraitForString:(NSString*)string
                                      weight:(CGFloat*)weight;
++ (IJSVGFontTraits)fontTraitForString:(NSString*)string;
++ (NSFontTraitMask)convertTraitsToNSFontTraits:(IJSVGFontTraits)traits;
 
 + (CGPathRef)newFlippedCGPath:(CGPathRef)path;
 

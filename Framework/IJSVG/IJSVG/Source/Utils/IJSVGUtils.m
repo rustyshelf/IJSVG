@@ -310,6 +310,19 @@ CGFloat IJSVGDegreesToRadians(CGFloat degrees)
     return foundID;
 }
 
++ (NSFontTraitMask)convertTraitsToNSFontTraits:(IJSVGFontTraits)traits {
+    NSUInteger convertedTraits = 0;
+    
+    if ((traits & IJSVGFontTraitItalic) == IJSVGFontTraitItalic) {
+        convertedTraits = convertedTraits | NSItalicFontMask;
+    }
+    if ((traits & IJSVGFontTraitBold) == IJSVGFontTraitBold) {
+        convertedTraits = convertedTraits | NSBoldFontMask;
+    }
+        
+    return convertedTraits;
+}
+
 + (IJSVGFontTraits)fontWeightTraitForString:(NSString*)string
                                      weight:(CGFloat*)weight
 {
@@ -323,6 +336,14 @@ CGFloat IJSVGDegreesToRadians(CGFloat degrees)
 {
     if([string isEqualToString:@"italic"])
         return IJSVGFontTraitItalic;
+    return IJSVGFontTraitNone;
+}
+
++ (IJSVGFontTraits)fontTraitForString:(NSString*)string
+{
+    if([string isEqualToString:@"italic"]) return IJSVGFontTraitItalic;
+    else if([string isEqualToString:@"bold"]) return IJSVGFontTraitBold;
+    
     return IJSVGFontTraitNone;
 }
 

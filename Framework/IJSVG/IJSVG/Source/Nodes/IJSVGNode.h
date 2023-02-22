@@ -169,6 +169,7 @@ void IJSVGAssertPaintableObject(id object);
 @property (nonatomic, assign) IJSVGWindingRule clipRule;
 @property (nonatomic, assign) IJSVGLineCapStyle lineCapStyle;
 @property (nonatomic, assign) IJSVGLineJoinStyle lineJoinStyle;
+@property (nonatomic, strong) IJSVGStyleSheetStyle *nodeStyle;
 @property (nonatomic, strong) IJSVGUnitLength* strokeMiterLimit;
 @property (nonatomic, strong) NSArray<IJSVGTransform*>* transforms;
 @property (nonatomic, strong) IJSVGFilter* filter;

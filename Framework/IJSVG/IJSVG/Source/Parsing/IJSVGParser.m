@@ -386,6 +386,7 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
     if(styleSheet != nil) {
         nodeStyle = [styleSheet mergedStyle:nodeStyle];
     }
+    node.nodeStyle = nodeStyle;
         
     // floating point numbers
     IJSVGAttributesParse(_IJSVGAttributeDictionaryFloats, ^id (NSString* value) {
@@ -667,9 +668,6 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
                                           parentNode:node
                                     postProcessBlock:&postProcessBlock];
             break;
-        }
-        case IJSVGNodeTypeFont: {
-            NSLog(@"Found a font \(element)");
         }
         case IJSVGNodeTypeRect: {
             computedNode = [self parseRectElement:element
@@ -1110,18 +1108,52 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
         [group addChild:node];
     }
     
-//    CGRect computedBounds = CGRectZero;
-//    IJSVGUnitType contentUnits = [parentNode contentUnitsWithReferencingNodeBounds:&computedBounds];
     *postProcessBlock = [self computeAttributesFromElement:element
                                                     onNode:node
                                          ignoredAttributes:nil];
     
+    // TODO: Decide if it makes sense to have a default font style/size or not
+    CGFloat fontSize = 16;
+    IJSVGFontTraits fontTraits = IJSVGFontTraitNone;
+    NSString *fontFamily = @"SF Pro";
+    
+    IJSVGStyleSheetStyle *nodeStyle = node.nodeStyle;
+    
+    // parse font style
+    NSString *fontProperty = [nodeStyle property:@"font"];
+    if (fontProperty.length > 0) {
+        NSArray *tokens = [fontProperty componentsSeparatedByString:@" "];
+        for (NSString *token in tokens) {
+            // look for font traits
+            IJSVGFontTraits trait = [IJSVGUtils fontTraitForString:token];
+            fontTraits = fontTraits | trait;
+            
+            // look for font size
+            IJSVGUnitLength *fontSizeUnit = [IJSVGUnitLength unitWithString:token];
+            if (fontSizeUnit.value > 0) fontSize = fontSizeUnit.value;
+        }
+    }
+    
+    // parse font-size style
+    NSString *fontSizeProperty = [nodeStyle property:@"font-size"];
+    if (fontSizeProperty.length > 0) {
+        IJSVGUnitLength *fontSizeUnit = [IJSVGUnitLength unitWithString:fontSizeProperty];
+        if (fontSizeUnit.value > 0) fontSize = fontSizeUnit.value;
+    }
+    
+    // parse font-family style
+    NSString *fontFamilyProperty = [nodeStyle property:@"font-family"];
+    if (fontFamilyProperty.length > 0) {
+        fontFamily = fontFamilyProperty;
+    }
+    
     NSString* text = element.stringValue;
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
-    
-    // TODO: parse the actual font
-    NSFont *tempFont = [NSFont systemFontOfSize:16];
-    [attributedText addAttribute:NSFontAttributeName value:tempFont range:NSMakeRange(0, attributedText.length)];
+
+    NSFontTraitMask nsTraits = [IJSVGUtils convertTraitsToNSFontTraits:fontTraits];
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    NSFont *font = [fontManager fontWithFamily:fontFamily traits:nsTraits weight:5 size:fontSize];
+    [attributedText addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attributedText.length)];
     
     node.text = attributedText;
     
