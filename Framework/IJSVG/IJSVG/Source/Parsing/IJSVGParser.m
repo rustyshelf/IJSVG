@@ -1150,10 +1150,15 @@ static NSArray* _IJSVGUseElementOverwritingAttributes = nil;
     NSString* text = element.stringValue;
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
 
-    NSFontTraitMask nsTraits = [IJSVGUtils convertTraitsToNSFontTraits:fontTraits];
-    NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    NSFont *font = [fontManager fontWithFamily:fontFamily traits:nsTraits weight:5 size:fontSize];
-    [attributedText addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attributedText.length)];
+    if (attributedText.length > 0) {
+        NSFontTraitMask nsTraits = [IJSVGUtils convertTraitsToNSFontTraits:fontTraits];
+        NSFontManager *fontManager = [NSFontManager sharedFontManager];
+        NSFont *font = [fontManager fontWithFamily:fontFamily traits:nsTraits weight:5 size:fontSize];
+        if (font == nil) {
+            font = [fontManager fontWithFamily:@"SF Pro" traits:nsTraits weight:5 size:fontSize];
+        }
+        [attributedText addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attributedText.length)];
+    }
     
     node.text = attributedText;
     
