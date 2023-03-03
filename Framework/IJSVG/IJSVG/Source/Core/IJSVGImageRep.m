@@ -23,20 +23,12 @@
 
 + (NSArray<NSString*>*)imageTypes
 {
-    if(@available(macOS 10.10, *)) {
-        return @[ (NSString*)kUTTypeScalableVectorGraphics, @"svg" ];
-    } else {
-        return @[ @"public.svg-image", @"svg" ];
-    }
+    return @[ (NSString*)UTTypeSVG, @"svg" ];
 }
 
 + (NSArray<NSString*>*)imageUnfilteredTypes
 {
-    if(@available(macOS 10.10, *)) {
-        return @[ (NSString*)kUTTypeScalableVectorGraphics, @"svg" ];
-    } else {
-        return @[ @"public.svg-image", @"svg" ];
-    }
+    return @[ (NSString*)UTTypeSVG, @"svg" ];
 }
 
 + (NSArray<NSImageRep*>*)imageRepsWithData:(NSData*)data

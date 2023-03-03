@@ -2251,11 +2251,7 @@ void IJSVGEnumerateCGPathElements(CGPathRef path, IJSVGPathElementEnumerationBlo
         }
         }
     };
-    if(@available(macOS 10.13, *)) {
-        CGPathApplyWithBlock(path, callback);
-    } else {
-        CGPathApply(path, (__bridge void*)callback, IJSVGExporterPathCaller);
-    }
+    CGPathApplyWithBlock(path, callback);
 };
 
 - (void)sortAttributesOnElement:(NSXMLElement*)element

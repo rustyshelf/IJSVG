@@ -586,12 +586,8 @@
 - (BOOL)drawInRect:(CGRect)rect
              error:(NSError**)error
 {
-    CGContextRef currentCGContext;
-    if(@available(macOS 10.10, *)) {
-        currentCGContext = NSGraphicsContext.currentContext.CGContext;
-    } else {
-        currentCGContext = NSGraphicsContext.currentContext.graphicsPort;
-    }
+    CGContextRef currentCGContext = NSGraphicsContext.currentContext.CGContext;
+
     return [self _drawInRect:rect
                      context:currentCGContext
                        error:error];
